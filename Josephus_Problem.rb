@@ -32,7 +32,7 @@ end
 
 def playgame(array)
 	if array.length == 1 #If only one person remains, then the game is over.
-		puts "#{array[0]} is the winner! He now can use the horse to leave the area."
+		puts "#{array[0]} is the winner! They will use the horse to leave the battlefield."
 	else
 		counted = nil #The 'counted' variable is cleared out
 		person = array.sample #randomly selects a person to serve as the counter
