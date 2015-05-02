@@ -24,27 +24,26 @@ Tyler_Pate
 
 #Original Solution
 def setgameup(array)
-	array.shuffle!
-	array.each_index { |i| @NumberHash[array[i]] = i+1 } #change the i variable to a variable that mean something!
-	puts @NumberHash
-	playgame(array)
+	array.shuffle! #Randomizes the order of the array
+	array.each_index { |i| @NumberHash[array[i]] = i+1 } #TODO: Change the i variable to a variable that mean something!
+	puts @NumberHash #Shows what "number" each person is assigned
+	playgame(array) #Start the game
 end
 
 def playgame(array)
-	if array.length == 1
-		puts "#{array[0]} is the winner!" 
+	if array.length == 1 #If only one person remains, then the game is over.
+		puts "#{array[0]} is the winner! He now can use the horse to leave the area."
 	else
-		counted = nil
-		person = array.sample
+		counted = nil #The 'counted' variable is cleared out
+		person = array.sample #randomly selects a person to serve as the counter
 		puts "#{person} is the new counter. They have Number #{@NumberHash[person]}."
-		circle = array.cycle
+		circle = array.cycle #Creates a "Cycle" enumerator using the array of those people still playing
 		(1 + array.index(person)).times { circle.next } #so inelegent, but it's needed to fix "circle.next" correctly.
-		@NumberHash[person].times { counted = circle.next }
+		@NumberHash[person].times { counted = circle.next } #The counter's number decides how many people the counter, er, "counts"...
 		puts "#{counted} had been picked and is out of the game."
-		array.delete(counted)
-		playgame(array)
+		array.delete(counted) #Deletes the loser from the array
+		playgame(array) #Keep going until one person remains.
 	end
-end #Do I need to have the person count himself when counting? I would say no, because then the guy
-#who picked one will lose.
+end
 
 setgameup(@test_array)
